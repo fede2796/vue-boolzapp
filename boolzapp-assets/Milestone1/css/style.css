@@ -30,6 +30,7 @@
     height: 80px;
     background-color: #eaeaea;
     display: flex;
+    border-right: 1px solid #d6d6d6;
 }
 .header-left img{
     width: 20%;
@@ -55,7 +56,7 @@
    padding-top: 20px;
 }
 .header-right p {
-    color: lightgray;
+    color: #6a7376;
 }
 .user-name{
     padding-top: 30px;
@@ -66,7 +67,7 @@
  padding-top: 30px;
 }
 .icon i{
-    color: grey;
+    color: #6a7376;
     padding: 5px;
 }
 /* Struttura del main del container e relativi contenuti */
@@ -103,7 +104,7 @@
 .contfooter{
     height: 80px;
     background-color: red;
-    margin-top: 290px;
+    margin-top: 295px;
 }
 .searchbarleft{
     padding-left: 10px;
@@ -123,11 +124,9 @@
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 5px;
-    padding-left: 10px;
     margin-right: 5px;
 }
 .contact{
-    padding: 10px;
     height:430px;
     background-color: white;
 }
@@ -138,7 +137,7 @@
 }
 .contact li{
     list-style: none;
-    border-top: 1px solid black;
+    border-top: 1px solid #fafafa;
     display: flex;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -151,6 +150,7 @@
     padding-top: 30px;
     margin-left: 10px;
     margin-right: 20px;
+    color: #6a7376;
 }
 .contfooter input{
     width: 80%;
