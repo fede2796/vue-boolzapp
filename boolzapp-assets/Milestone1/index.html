@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Vue-Boolzapp</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>   
         <div class="container">
@@ -24,17 +25,65 @@
                         </div>
                     </div>
                     <div class="header-right">
-                        ciao
+                        <img src="img/avatar_1.jpg" alt="avatar_1">
+                        <div class="user-name">
+                            <h3>Samuele</h3>
+                            <p>Ultimo asccesso oggi alle</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                            <i class="fa-solid fa-paperclip fa-lg"></i>
+                            <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+                        </div>
                     </div>
                 </div>
                 <div class="contmain">
                    <div class="main-left">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae voluptatem quam ea ad delectus sunt in deleniti ipsum dolores ipsam sit molestiae qui, similique reprehenderit assumenda! Magnam eius qui harum?
+                    <div class="notes">
+                        <div class="square">
+                            <i class="fa-solid fa-bell-slash fa-xl"></i>
+                        </div>
+                        <div class="message">
+                            <h3>Ricevi notifiche di nuovi messaggi</h3>
+                            <a href="#">Attiva notifiche desktop</a> 
+                        </div>
+                    </div>
+                    <div class="searchbarleft">
+                        <div class="gray">
+                             <i class="fa-solid fa-magnifying-glass glass-style"></i>
+                             <label for="search"></label>
+                             <input type="text" id="search" name="search" placeholder="Cerca o Inizia una nuova chat">
+                        </div>
+                        <div class="contact">
+                            <div id="root">
+                              <!-- Single contact -->
+                              <li v-for="(contact, index) in contacts">
+                                <img :src="'img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
+                                <span>{{ contact.name }}
+                                </span>
+                              </li>
+                               
+                             </div>
+                        </div>
+                       
+                    </div>
                    </div>
                    <div class="main-right">
-                    ciao
+                    <div id="root">
+                         <div class="message-container">
+                            <div class="classmessage" v-for="message in contacts[0].messages" :class="message.status === 'sent' ? 'received' : 'sent' "></div>
+                            <div>{{message.text}}</div>
+                            <span>{{message.date}}</span>
+                        </div>
+                    </div>
+                   
                     <div class="contfooter">
-                        ciao
+                        <div class="gray">
+                            <i class="fa-solid fa-face-smile fa-xl"></i>
+                            <label for="search"></label>
+                            <input type="text" id="search" name="search" placeholder="Cerca o Inizia una nuova chat">
+                            <i class="fa-solid fa-microphone fa-xl"></i>
+                        </div>
                     </div>
                    </div>  
                 </div>
