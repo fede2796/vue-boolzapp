@@ -3,19 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-.header-container{
-    display: flex;
-}
-.header-left{
-    width: 40%;
-    height: 50px;
-    background-color: pink;
-}
-.header-right{
-    width: 60%;
-    height: 50px;
-    background-color: orange;
-}
+
 /* Struttura del Container */
 .container{
     background-color: blue;
@@ -33,6 +21,39 @@
     max-width: 1000px;
     height: 600px;
 }
+/* Struttura dell'header del container e relativi contenuti */
+.header-container{
+    display: flex;
+}
+.header-left{
+    width: 40%;
+    height: 80px;
+    background-color: pink;
+    display: flex;
+}
+.header-right{
+    width: 60%;
+    height: 80px;
+    background-color: orange;
+}
+.header-left img{
+    width: 20%;
+    padding: 10px;
+    border-radius: 50%;
+}
+.user-name{
+    padding-top: 30px;
+    font-size: 15px;
+}
+.icon{
+ margin-left: 140px;
+ padding-top: 30px;
+}
+.icon i{
+    color: grey;
+    padding: 5px;
+}
+/* Struttura del main del container e relativi contenuti */
 .contmain{
     display: flex;
 }
