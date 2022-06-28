@@ -48,5 +48,7 @@
     
 }
 .contfooter{
-
+    height: 102px;
+    background-color: red;
+    margin-top: 430px;
 }
