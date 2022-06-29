@@ -1,9 +1,9 @@
 var app = new Vue(
 	{
-			el: '#root',
-			data: {
-				
-				UserActiveChat: 2,
+		el: '#root',
+		data: {
+				userActiveChat: 2,
+				userText: '',
 				contacts: [
 					{
 						name: 'Michele',
@@ -20,7 +20,7 @@ var app = new Vue(
 								text: 'Ricordati di dargli da mangiare',
 								status: 'sent'
 							},
-							{
+								{
 								date: '10/01/2020 16:15:22',
 								text: 'Tutto fatto!',
 								status: 'received'
@@ -28,10 +28,10 @@ var app = new Vue(
 						],
 					},
 					{
-						name: 'Fabio',
-						avatar: '_2',
-						visible: true,
-						messages: [
+							name: 'Fabio',
+							avatar: '_2',
+							visible: true,
+							messages: [
 							{
 								date: '20/03/2020 16:30:00',
 								text: 'Ciao come stai?',
@@ -57,7 +57,7 @@ var app = new Vue(
 							{
 								date: '28/03/2020 10:10:40',
 								text: 'La Marianna va in campagna',
-								status: 'received'
+									status: 'received'
 							},
 							{
 								date: '28/03/2020 10:20:10',
@@ -91,9 +91,34 @@ var app = new Vue(
 				]				
 			},
 			methods: {
-				messagges(index){
-					this.UserActiveChat = index;
-				}
+				chatUser(index){
+					
+					this.userActiveChat = index;
+				},
+				sendMessage(){
+					
+					const trimmedString = this.userText.trim();
+					
+					if(trimmedString.length > 0){
+						this.contacts[this.userActiveChat].messages.push({
+								date: dayjs().format("DD/MM/YYYY") + ' ' + dayjs().format("HH:mm:ss"),
+								text: trimmedString,
+								status: 'sent'
+							}
+						)
+						setTimeout(this.responseMessage,1000);							
+					}							
+					
+					this.userText = "";	
+				},
+				responseMessage(){
+					
+					this.contacts[this.userActiveChat].messages.push({
+						date: dayjs().format("DD/MM/YYYY") + ' ' + dayjs().format("HH:mm:ss"),
+						text: "ok",
+						status: 'received'
+					})
+				},
 			}
 	}
 );
