@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="css/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <!-- General Container -->
+  <div class="container" id="root">
+    <!-- What's app Container -->
+    <div class="w-container">
+      
+      <!-- What's app A Side -->
+      <aside>
+        <div class="rectagle background-grey">
+          <div class="container-user-top">
+            <div class="user-align">
+              <img src="img\avatar_io.jpg" alt="user-avatar">
+              <span class="user-font"> Nome Utente </span> 
+            </div>
+            <!-- A Side menu -->
+            <div class="logo">
+              <i class="fa-solid fa-circle-notch"></i>
+              <i class="fa-solid fa-message"></i>
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
+          </div>
+        </div>
+        <div class="container-user-top background-lightblue">
+          <div class="user-align">
+            <i class="fa-solid fa-bell-slash bell-style"></i>
+            <!-- CTA -->
+            <div>
+              <h4>Ricevi notifiche di nuovi messaggi</h4>
+              <a href="#">attiva notifiche desktop</a>
+            </div>      
+          </div>       
+        </div>
+        <!-- Search Bar -->
+        <div class="serch-bar background-grey">
+          <i class="fa-solid fa-magnifying-glass glass-style"></i>
+          <label for="search"></label>
+          <input type="text" id="search" name="search" placeholder="Cerca o inizia una nuova chat">
+        </div>
+
+        <!-- Contacts Printer -->
+        <div class="contact-container">
+          <ul class="contact-list">
+            <li v-for="(contact, index) in contacts" @click="messagges(index)">
+              <img :src="'img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
+              <span>{{ contact.name }}
+                <span class="last-access-text">                 
+                </span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <div class="main">
+        <div class="container-user-top background-grey">
+          <div class="user-align">
+            <!-- User to read chat -->
+            <img :src="'img/avatar' + contacts[UserActiveChat].avatar + '.jpg'" alt="user-avatar">
+            <span class="user-font"> {{contacts[UserActiveChat].name}}
+              <span class="last-access-text"> ultimo accesso oggi alle </span>
+            </span>
+          </div>
+          
+          <div class="logo">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-paperclip"></i>
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </div>
+        </div>
+        <!-- User messagges -->
+        <div class="background-container">
+          <div class="message-container">
+            <div class="message"  v-for="message in contacts[UserActiveChat].messages" :class="message.status === 'sent' ? 'w-sent' : 'w-recived' ">
+              <div>{{message.text}}</div>
+              <span>{{message.date}}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Writing area -->
+        <div class="container-user-top background-sand">
+          <i class="fa-regular fa-face-smile bottom-icon-style"></i>
+          <label for="send-message"></label>
+          <input type="text" id="send-message" name="send-message" placeholder="Scrivi un messaggio">
+          <i class="fa-solid fa-microphone bottom-icon-style"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/script.js"></script>
+</body>
+</html>
+
+
