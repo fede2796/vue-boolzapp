@@ -3,6 +3,7 @@ var app = new Vue(
 			el: '#root',
 			data: {
 				
+				UserActiveChat: 2,
 				contacts: [
 					{
 						name: 'Michele',
@@ -90,6 +91,9 @@ var app = new Vue(
 				]				
 			},
 			methods: {
+				messagges(index){
+					this.UserActiveChat = index;
+				}
 			}
 	}
 );
