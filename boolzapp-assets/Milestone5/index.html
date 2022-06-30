@@ -7,13 +7,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
+  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <link rel="stylesheet" href="css/style.css">
-  <title>Document</title>
+  <title>Boozapp</title>
 </head>
 <body>
   <!-- General Container -->
@@ -27,9 +27,9 @@
           <div class="container-user-top">
             <div class="user-align">
               <img src="img\avatar_io.jpg" alt="user-avatar">
-              <span class="wa-user-font"> Nome Utente </span> 
+              <span class="user-font"> Nome Utente </span> 
             </div>
-            <!-- Logo -->
+            <!-- What's app A Side icons -->
             <div class="logo">
               <i class="fa-solid fa-circle-notch"></i>
               <i class="fa-solid fa-message"></i>
@@ -37,7 +37,7 @@
             </div>
           </div>
         </div>
-        <!-- Ricevi Notifiche -->
+        <!-- CTA -->
         <div class="container-user-top background-lightblue">
           <div class="user-align">
             <i class="fa-solid fa-bell-slash bell-style"></i>
@@ -47,54 +47,73 @@
             </div>      
           </div>       
         </div>
-        <!-- Ricerca chat -->
+        <!-- Contact Search bar -->
         <div class="serch-bar background-grey">
           <i class="fa-solid fa-magnifying-glass glass-style"></i>
           <label for="search"></label>
-          <input type="text" id="search" name="search" placeholder="Cerca o inizia una nuova chat" @keyup="filterelements" v-model="userfilter">
+          <input type="text" id="search" name="search" placeholder="Cerca o inizia una nuova chat" @keyup="filterelements()" v-model="userfilter">
         </div>
-        <!-- Contatto -->
+
+        <!-- Contacts -->
         <div class="contact-container">
           <ul class="contact-list">
-            <li v-for="(contact, index) in contacts" @click="chatUser(index)" v-if="contact.visible">
-              <img :src="'img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
-              <span>{{ contact.name }}
-                <span class="last-access-text">
-                    {{contact.messages[0].text}}
+            <!-- Print all messagges -->
+            <li v-for="(contact, index) in contacts" @click="chatUser(index)" v-if="contact.visible" :class="{'background-grey': index === userActiveChat}">
+              <div>
+                <img :src="'img/avatar' + contact.avatar + '.jpg'" :alt="contact.name">
+                <span>{{ contact.name }}
+                  <span v-if="contact.messages.length > 0" class="last-access-text">
+                    {{slicemessage(contact.messages[contact.messages.length - 1].text)}}
+                  </span>
+                  <span v-else class="last-access-text">
+                    non ci sono conversazioni con {{contact.name}}
+                  </span>
                 </span>
+              </div>
+              
+              <span v-if="contact.messages.length > 0" class="last-access-text grows">
+                {{contact.messages[contact.messages.length - 1].date}}             
               </span>
-
-              <span class="last-access-text grows">{{contact.messages[0].date}}</span>
             </li>
           </ul>
         </div>
-
       </aside>
-      <!-- Main Page -->
+      <!-- contact info -->
       <div class="main">
         <div class="container-user-top background-grey">
           <div class="user-align">
             <img :src="'img/avatar' + contacts[userActiveChat].avatar + '.jpg'" alt="user-avatar">
             <span class="user-font"> {{contacts[userActiveChat].name}}
-              <span class="last-access-text"> ultimo accesso oggi alle </span>
+              <span v-if="contacts[userActiveChat].messages.length > 0" class="last-access-text"> 
+                ultimo accesso oggi alle {{contacts[userActiveChat].messages[contacts[userActiveChat].messages.length - 1].date}}
+              </span>
             </span>
           </div>
-          
+          <!-- contact icons -->
           <div class="logo">
             <i class="fa-solid fa-magnifying-glass"></i>
             <i class="fa-solid fa-paperclip"></i>
             <i class="fa-solid fa-ellipsis-vertical"></i>
           </div>
         </div>
+        <!-- chat and messages area -->
         <div class="background-container">
-          <div class="message-container">
-            <div class="message"  v-for="message in contacts[userActiveChat].messages" :class="message.status === 'sent' ? 'w-sent' : 'w-recived' ">
-              <p>{{message.text}}</p>
+          <div class="message-container" v-show=" contacts[userActiveChat].messages.length > 0">
+            <div class="message" v-for="(message,index) in contacts[userActiveChat].messages" :class="message.status === 'sent' ? 'w-sent' : 'w-recived'" >
+              <div class="message-text-align">
+                <span>{{message.text}}</span>
+                <!-- Menù a tendina -->
+                <i class="fa-solid fa-chevron-down" @click="curtainMenu(index)" ></i>
+                <div class="d-none" :class="{'curtainMenu' : index === selectname}">
+                  <span>info messaggio</span>
+                  <span @click="messageDelete(index)">elimina messaggio</span>
+                </div>
+              </div>
               <span>{{message.date}}</span>
             </div>
           </div>
         </div>
-
+        <!-- writing chat input -->
         <div class="container-user-top background-sand">
           <i class="fa-regular fa-face-smile bottom-icon-style"></i>
           <label for="send-message"></label>
@@ -104,7 +123,7 @@
       </div>
     </div>
   </div>
-  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+  
   <script src="js/script.js"></script>
 </body>
 </html>
